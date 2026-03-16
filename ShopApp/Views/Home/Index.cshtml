@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center py-5">
+    <h1 class="display-3 fw-bold">Welcome to ShopApp</h1>
+    <p class="lead text-muted mb-4">Your one-stop shop for great products. Browse our catalog, create an account, and start shopping today.</p>
+    <div class="d-flex justify-content-center gap-3">
+        <a asp-controller="Products" asp-action="Index" class="btn btn-primary btn-lg">Browse Products</a>
+        @if (!User.Identity!.IsAuthenticated)
+        {
+            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-outline-secondary btn-lg">Create Account</a>
+        }
+        else
+        {
+            <a asp-area="Identity" asp-page="/Account/Manage/Index" class="btn btn-outline-secondary btn-lg">My Profile</a>
+        }
+    </div>
+</div>
+
+<hr />
+
+<div class="row text-center mt-4">
+    <div class="col-md-4 mb-4">
+        <div class="card border-0 shadow-sm h-100 p-4">
+            <div class="display-5 mb-3">🛍️</div>
+            <h4>Wide Selection</h4>
+            <p class="text-muted">Browse products across multiple categories with full search and filter support.</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card border-0 shadow-sm h-100 p-4">
+            <div class="display-5 mb-3">🔐</div>
+            <h4>Secure Accounts</h4>
+            <p class="text-muted">Register and log in securely. Manage your profile, address, and preferences.</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card border-0 shadow-sm h-100 p-4">
+            <div class="display-5 mb-3">✏️</div>
+            <h4>Easy Management</h4>
+            <p class="text-muted">Authenticated users can add, edit, and delete products to keep the catalog up to date.</p>
+        </div>
+    </div>
+</div>
