@@ -1,0 +1,39 @@
+@model ShopApp.Models.Product
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="row">
+    <div class="col-md-6">
+        @if (!string.IsNullOrWhiteSpace(Model.ImageUrl))
+        {
+            <img src="@Model.ImageUrl" class="img-fluid rounded shadow mb-3" alt="@Model.Name"
+                 onerror="this.style.display='none'" />
+        }
+    </div>
+    <div class="col-md-6">
+        <h1>@Model.Name</h1>
+        <span class="badge bg-secondary fs-6 mb-3">@Model.Category</span>
+        <p class="lead text-success fw-bold fs-3">@Model.Price.ToString("C")</p>
+        <p>@Model.Description</p>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-4">Stock Quantity</dt>
+            <dd class="col-sm-8">@Model.StockQuantity</dd>
+            <dt class="col-sm-4">Created</dt>
+            <dd class="col-sm-8">@Model.CreatedAt.ToString("MMM d, yyyy")</dd>
+            <dt class="col-sm-4">Last Updated</dt>
+            <dd class="col-sm-8">@Model.UpdatedAt.ToString("MMM d, yyyy")</dd>
+        </dl>
+
+        <div class="d-flex gap-2 mt-3">
+            @if (User.Identity!.IsAuthenticated)
+            {
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+            }
+            <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+        </div>
+    </div>
+</div>
