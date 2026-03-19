@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using ShopApp.Data;
 using ShopApp.Models;
 
 namespace ShopApp.Areas.Identity.Pages.Account
@@ -119,6 +120,9 @@ namespace ShopApp.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    // All self-registered users are Customers
+                    await _userManager.AddToRoleAsync(user, DbInitializer.CustomerRole);
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);

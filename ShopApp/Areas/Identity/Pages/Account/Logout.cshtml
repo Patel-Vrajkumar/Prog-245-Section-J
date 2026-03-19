@@ -4,18 +4,29 @@
     ViewData["Title"] = "Log out";
 }
 
-<header>
-    <h1>@ViewData["Title"]</h1>
-    @{
-        if (User.Identity?.IsAuthenticated ?? false)
-        {
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                <button type="submit" class="nav-link btn btn-link text-dark">Click here to Logout</button>
-            </form>
-        }
-        else
-        {
-            <p>You have successfully logged out of the application.</p>
-        }
+<div class="text-center py-5">
+    @if (User.Identity?.IsAuthenticated ?? false)
+    {
+        <h1>@ViewData["Title"]</h1>
+        <p class="lead text-muted">Are you sure you want to log out?</p>
+        <form class="d-inline" asp-area="Identity" asp-page="/Account/Logout"
+              asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+            <button type="submit" class="btn btn-lg btn-danger">Log out</button>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-lg btn-outline-secondary ms-2">Cancel</a>
+        </form>
     }
-</header>
+    else
+    {
+        <div class="card shadow-sm mx-auto" style="max-width:400px;">
+            <div class="card-body py-5">
+                <div class="display-5 mb-3">👋</div>
+                <h2 class="card-title">You have been logged out.</h2>
+                <p class="card-text text-muted">Thank you for visiting ShopApp.</p>
+                <div class="d-flex justify-content-center gap-2 mt-4">
+                    <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary">Log back in</a>
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Go to Home</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

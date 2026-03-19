@@ -6,7 +6,7 @@ using ShopApp.Models;
 
 namespace ShopApp.Controllers;
 
-[Authorize]
+[Authorize(Roles = "Admin")]
 public class ProductsController : Controller
 {
     private readonly ApplicationDbContext _context;
